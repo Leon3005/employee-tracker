@@ -15,13 +15,16 @@ class Db {
   }
 
   start() {
-    const startConnection = (err) => {
-      if (err) {
-        throw err;
-      }
-      console.log(`Connection to ${this.database} established.`);
-    };
-    this.connection.connect(startConnection);
+    return new Promise((resolve, reject) => {
+      const startConnection = (err) => {
+        if (err) {
+          reject(err);
+        }
+        console.log(`Connection to ${this.database} established.`);
+        resolve();
+      };
+      this.connection.connect(startConnection);
+    });
   }
 }
 
