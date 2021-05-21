@@ -12,7 +12,7 @@ const init = async () => {
     const selectOption = {
       type: "list",
       message: "Choose an option from the list below:",
-      name: "option",
+      name: "choice",
       choices: [
         {
           name: "--- View all employees ---",
@@ -27,13 +27,12 @@ const init = async () => {
     const { choice } = await inquirer.prompt(selectOption);
 
     if (choice === "VIEWEMPLOYEES") {
-      await console.log("view");
       const employees = await database.allData("employee");
-      await console.table(employees);
+      console.table(employees);
     }
 
     if (choice === "EXIT") {
-      console.log("exit");
+      console.log("App exited.");
       inProgress = false;
       database.end();
     }
