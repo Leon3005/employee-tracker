@@ -27,6 +27,11 @@ class Db {
     });
   }
 
+  end() {
+    this.connection.end();
+    console.log(`Disconnected from ${this.database}`);
+  }
+
   allData(tableName) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, data) => {
