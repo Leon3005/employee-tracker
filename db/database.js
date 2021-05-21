@@ -26,6 +26,16 @@ class Db {
       this.connection.connect(startConnection);
     });
   }
+
+  allData(tableName) {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, data) => {
+        if (err) reject(err);
+        resolve(data);
+      };
+      this.connection.query(`SELECT * FROM ${tableName}`, handleQuery);
+    });
+  }
 }
 
 module.exports = Db;
