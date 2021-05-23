@@ -68,7 +68,7 @@ class Db {
         resolve(rows);
       };
 
-      this.connection.query(`INSERT INTO employee SET ${data};`, handleQuery);
+      this.connection.query(`INSERT INTO employee SET ? ;`, data, handleQuery);
     });
   }
 }
