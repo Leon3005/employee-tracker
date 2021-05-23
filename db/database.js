@@ -39,9 +39,10 @@ class Db {
         resolve(data);
       };
       this.connection.query(
-        `SELECT first_name as "first_name", last_name as "last_name", title as "role", salary as "salary" FROM employee RIGHT JOIN role ON employee.role_id=role.id`,
+        `SELECT first_name as "first_name", last_name as "last_name", title as "role", name as "department", salary as "salary" FROM employee RIGHT JOIN role ON employee.role_id=role.id INNER JOIN department on department.id=role.department_id;`,
         handleQuery
       );
+      // MANAGER? --  manager_id as "manager" -- employee on employee.manager_id=employee.id
     });
   }
 
@@ -55,6 +56,19 @@ class Db {
         `SELECT title as "role", name as "department", salary as "salary" FROM department RIGHT JOIN role ON department.id=role.department_id;`,
         handleQuery
       );
+    });
+  }
+
+  addEmployee(data) {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, rows) => {
+        if (err) reject(err);
+        console.log("Successfully inserted data");
+        console.log(data);
+        resolve(rows);
+      };
+
+      this.connection.query(`INSERT INTO employee SET ${data};`, handleQuery);
     });
   }
 }

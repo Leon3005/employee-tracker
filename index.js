@@ -23,6 +23,10 @@ const init = async () => {
           value: "VIEWROLEDEPARTMENT",
         },
         {
+          name: "--- Add a new employee ---",
+          value: "ADDEMPLOYEE",
+        },
+        {
           name: "--- Exit app ---",
           value: "EXIT",
         },
@@ -38,6 +42,29 @@ const init = async () => {
     if (choice === "VIEWROLEDEPARTMENT") {
       const rolesDepartments = await database.allRolesDepartments();
       console.table(rolesDepartments);
+    }
+
+    if (choice === "ADDEMPLOYEE") {
+      const newEmployeeQ = [
+        {
+          type: "input",
+          message: "Enter the first name of the employee:",
+          name: "first_name",
+        },
+        {
+          type: "input",
+          message: "Enter the last name of the employee:",
+          name: "last_name",
+        },
+        {
+          type: "input",
+          message: "Enter the role ID of the employee:",
+          name: "role_id",
+        },
+      ];
+
+      const answers = await inquirer.prompt(newEmployeeQ);
+      await database.addEmployee(answers);
     }
 
     if (choice === "EXIT") {
