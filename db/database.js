@@ -38,7 +38,10 @@ class Db {
         if (err) reject(err);
         resolve(data);
       };
-      this.connection.query(`SELECT * FROM employee`, handleQuery);
+      this.connection.query(
+        `SELECT first_name as "first_name", last_name as "last_name", title as "role", salary as "salary" FROM employee RIGHT JOIN role ON employee.role_id=role.id`,
+        handleQuery
+      );
     });
   }
 
