@@ -41,6 +41,19 @@ class Db {
       this.connection.query(`SELECT * FROM employee`, handleQuery);
     });
   }
+
+  allRolesDepartments() {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, data) => {
+        if (err) reject(err);
+        resolve(data);
+      };
+      this.connection.query(
+        `SELECT title as "role", name as "department", salary as "salary" FROM department RIGHT JOIN role ON department.id=role.department_id;`,
+        handleQuery
+      );
+    });
+  }
 }
 
 module.exports = Db;

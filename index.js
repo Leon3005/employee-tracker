@@ -19,6 +19,10 @@ const init = async () => {
           value: "VIEWEMPLOYEES",
         },
         {
+          name: "--- View all roles and departments ---",
+          value: "VIEWROLEDEPARTMENT",
+        },
+        {
           name: "--- Exit app ---",
           value: "EXIT",
         },
@@ -27,8 +31,13 @@ const init = async () => {
     const { choice } = await inquirer.prompt(selectOption);
 
     if (choice === "VIEWEMPLOYEES") {
-      const employees = await database.allData();
+      const employees = await database.allEmployeeData();
       console.table(employees);
+    }
+
+    if (choice === "VIEWROLEDEPARTMENT") {
+      const rolesDepartments = await database.allRolesDepartments();
+      console.table(rolesDepartments);
     }
 
     if (choice === "EXIT") {
