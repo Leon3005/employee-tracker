@@ -27,7 +27,7 @@ const init = async () => {
     const { choice } = await inquirer.prompt(selectOption);
 
     if (choice === "VIEWEMPLOYEES") {
-      const employees = await database.allData("employee");
+      const employees = await database.allData();
       console.table(employees);
     }
 

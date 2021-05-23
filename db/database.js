@@ -32,13 +32,13 @@ class Db {
     console.log(`Disconnected from ${this.database}`);
   }
 
-  allData(tableName) {
+  allEmployeeData() {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, data) => {
         if (err) reject(err);
         resolve(data);
       };
-      this.connection.query(`SELECT * FROM ${tableName}`, handleQuery);
+      this.connection.query(`SELECT * FROM employee`, handleQuery);
     });
   }
 }
