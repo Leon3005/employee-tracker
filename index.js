@@ -45,6 +45,18 @@ const init = async () => {
     }
 
     if (choice === "ADDEMPLOYEE") {
+      const allRoles = await database.allRoles();
+
+      const generateChoices = (roles) => {
+        return roles.map((role) => {
+          return {
+            short: role.id,
+            name: role.title,
+            value: role.id,
+          };
+        });
+      };
+
       const newEmployeeQ = [
         {
           type: "input",
@@ -57,9 +69,10 @@ const init = async () => {
           name: "last_name",
         },
         {
-          type: "input",
+          type: "list",
           message: "Enter the role ID of the employee:",
           name: "role_id",
+          choices: generateChoices(allRoles),
         },
       ];
 

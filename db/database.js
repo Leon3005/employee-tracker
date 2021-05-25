@@ -71,6 +71,17 @@ class Db {
       this.connection.query(`INSERT INTO employee SET ? ;`, data, handleQuery);
     });
   }
+
+  allRoles() {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      };
+
+      this.connection.query(`SELECT * FROM role;`, handleQuery);
+    });
+  }
 }
 
 module.exports = Db;
