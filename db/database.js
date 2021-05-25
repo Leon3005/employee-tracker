@@ -74,7 +74,7 @@ class Db {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
-        console.log("Successfully inserted data");
+        console.log("Employee has been added!");
         resolve(rows);
       };
 
@@ -86,11 +86,27 @@ class Db {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
-        console.log("Successfully inserted data");
+        console.log("Role has been added!");
         resolve(rows);
       };
 
       this.connection.query(`INSERT INTO role SET ? ;`, data, handleQuery);
+    });
+  }
+
+  addDepartment(data) {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, rows) => {
+        if (err) reject(err);
+        console.log("Department has been added!");
+        resolve(rows);
+      };
+
+      this.connection.query(
+        `INSERT INTO department SET ? ;`,
+        data,
+        handleQuery
+      );
     });
   }
 

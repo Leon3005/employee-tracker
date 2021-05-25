@@ -31,6 +31,10 @@ const init = async () => {
           value: "ADDROLE",
         },
         {
+          name: "--- Add a new department ---",
+          value: "ADDDEPARTMENT",
+        },
+        {
           name: "--- Delete an employee ---",
           value: "DELETEEMPLOYEE",
         },
@@ -122,6 +126,19 @@ const init = async () => {
 
       const answers = await inquirer.prompt(newRoleQ);
       await database.addRole(answers);
+    }
+
+    if (choice === "ADDDEPARTMENT") {
+      const newDepartmentQ = [
+        {
+          type: "input",
+          message: "Enter the name of the department:",
+          name: "name",
+        },
+      ];
+
+      const answers = await inquirer.prompt(newDepartmentQ);
+      await database.addDepartment(answers);
     }
 
     if (choice === "DELETEEMPLOYEE") {
