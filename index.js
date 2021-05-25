@@ -27,6 +27,10 @@ const init = async () => {
           value: "ADDEMPLOYEE",
         },
         {
+          name: "--- Add a new role ---",
+          value: "ADDROLE",
+        },
+        {
           name: "--- Delete an employee ---",
           value: "DELETEEMPLOYEE",
         },
@@ -74,7 +78,7 @@ const init = async () => {
         },
         {
           type: "list",
-          message: "Enter the role ID of the employee:",
+          message: "Choose the employee's role:",
           name: "role_id",
           choices: generateChoices(allRoles),
         },
@@ -82,6 +86,42 @@ const init = async () => {
 
       const answers = await inquirer.prompt(newEmployeeQ);
       await database.addEmployee(answers);
+    }
+
+    if (choice === "ADDROLE") {
+      const allDepartments = await database.selectAll("department");
+
+      const generateChoices = (departments) => {
+        return departments.map((department) => {
+          return {
+            short: department.id,
+            name: department.name,
+            value: department.id,
+          };
+        });
+      };
+
+      const newRoleQ = [
+        {
+          type: "input",
+          message: "Enter the name of the role:",
+          name: "title",
+        },
+        {
+          type: "input",
+          message: "Enter the salary of the role: (with 2 decimal points)",
+          name: "salary",
+        },
+        {
+          type: "list",
+          message: "Choose the department the role belongs to:",
+          name: "department_id",
+          choices: generateChoices(allDepartments),
+        },
+      ];
+
+      const answers = await inquirer.prompt(newRoleQ);
+      await database.addRole(answers);
     }
 
     if (choice === "DELETEEMPLOYEE") {

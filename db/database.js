@@ -75,11 +75,22 @@ class Db {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
         console.log("Successfully inserted data");
-        console.log(data);
         resolve(rows);
       };
 
       this.connection.query(`INSERT INTO employee SET ? ;`, data, handleQuery);
+    });
+  }
+
+  addRole(data) {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, rows) => {
+        if (err) reject(err);
+        console.log("Successfully inserted data");
+        resolve(rows);
+      };
+
+      this.connection.query(`INSERT INTO role SET ? ;`, data, handleQuery);
     });
   }
 
