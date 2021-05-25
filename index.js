@@ -19,8 +19,12 @@ const init = async () => {
           value: "VIEWEMPLOYEES",
         },
         {
-          name: "--- View all roles and departments ---",
-          value: "VIEWROLEDEPARTMENT",
+          name: "--- View all roles ---",
+          value: "VIEWROLES",
+        },
+        {
+          name: "--- View all departments ---",
+          value: "VIEWDEPARTMENTS",
         },
         {
           name: "--- Add a new employee ---",
@@ -51,9 +55,14 @@ const init = async () => {
       console.table(employees);
     }
 
-    if (choice === "VIEWROLEDEPARTMENT") {
+    if (choice === "VIEWROLES") {
       const rolesDepartments = await database.allRolesDepartments();
       console.table(rolesDepartments);
+    }
+
+    if (choice === "VIEWDEPARTMENTS") {
+      const allRoles = await database.selectAll("department");
+      console.table(allRoles);
     }
 
     if (choice === "ADDEMPLOYEE") {
