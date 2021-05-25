@@ -39,10 +39,9 @@ class Db {
         resolve(data);
       };
       this.connection.query(
-        `SELECT first_name as "first_name", last_name as "last_name", title as "role", name as "department", salary as "salary" FROM employee RIGHT JOIN role ON employee.role_id=role.id INNER JOIN department on department.id=role.department_id;`,
+        `SELECT first_name as "First Name", last_name as "Last Name", title as "Role", name as "Department", salary as "Salary", (SELECT CONCAT(m.first_name, " ", m.last_name) FROM employee AS m WHERE employee.manager_id=m.id) AS "Managers" FROM employee AS employee LEFT JOIN role ON employee.role_id=role.id LEFT JOIN department on department.id=role.department_id;`,
         handleQuery
       );
-      // MANAGER? --  manager_id as "manager" -- employee on employee.manager_id=employee.id
     });
   }
 
