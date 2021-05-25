@@ -46,6 +46,17 @@ class Db {
     });
   }
 
+  selectAll(tableName) {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      };
+
+      this.connection.query(`SELECT * FROM ${tableName};`, handleQuery);
+    });
+  }
+
   allRolesDepartments() {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, data) => {
@@ -72,14 +83,21 @@ class Db {
     });
   }
 
-  allRoles() {
+  deleteEmployee(tableName, columnName, value) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
+        console.log("Employee deleted!");
         resolve(rows);
       };
 
-      this.connection.query(`SELECT * FROM role;`, handleQuery);
+      const query = this.connection.query(
+        `DELETE FROM ${tableName} WHERE ??=?`,
+        [columnName, value],
+        handleQuery
+      );
+
+      console.log(query.sql);
     });
   }
 }
