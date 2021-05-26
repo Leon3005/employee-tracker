@@ -51,6 +51,10 @@ const init = async () => {
           value: "DELETEEMPLOYEE",
         },
         {
+          name: "--- Delete a role ---",
+          value: "DELETEROLE",
+        },
+        {
           name: "--- Exit app ---",
           value: "EXIT",
         },
@@ -252,7 +256,32 @@ const init = async () => {
       ];
 
       const { id } = await inquirer.prompt(findEmployee);
-      await database.deleteEmployee("employee", "id", id);
+      await database.deleteOne("employee", "id", id);
+    }
+
+    if (choice === "DELETEROLE") {
+      const allRoles = await database.selectAll("role");
+
+      const generateChoices = (roles) => {
+        return roles.map((role) => {
+          return {
+            short: role.id,
+            name: role.title,
+            value: role.id,
+          };
+        });
+      };
+      const findRole = [
+        {
+          type: "list",
+          message: "Choose the employee you would like to delete:",
+          name: "id",
+          choices: generateChoices(allRoles),
+        },
+      ];
+
+      const { id } = await inquirer.prompt(findRole);
+      await database.deleteOne("role", "id", id);
     }
 
     if (choice === "EXIT") {

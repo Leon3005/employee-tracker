@@ -113,7 +113,7 @@ class Db {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
-        console.log("Successfully updated data");
+        console.log("Successfully updated data!");
         resolve(rows);
       };
 
@@ -125,11 +125,11 @@ class Db {
     });
   }
 
-  deleteEmployee(tableName, columnName, value) {
+  deleteOne(tableName, columnName, value) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
-        console.log("Employee deleted!");
+        console.log("Role deleted!");
         resolve(rows);
       };
 
@@ -138,8 +138,6 @@ class Db {
         [columnName, value],
         handleQuery
       );
-
-      console.log(query.sql);
     });
   }
 }
