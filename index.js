@@ -55,6 +55,10 @@ const init = async () => {
           value: "DELETEROLE",
         },
         {
+          name: "--- Delete a department ---",
+          value: "DELETEDEPARTMENT",
+        },
+        {
           name: "--- Exit app ---",
           value: "EXIT",
         },
@@ -274,7 +278,7 @@ const init = async () => {
       const findRole = [
         {
           type: "list",
-          message: "Choose the employee you would like to delete:",
+          message: "Choose the role you would like to delete:",
           name: "id",
           choices: generateChoices(allRoles),
         },
@@ -282,6 +286,31 @@ const init = async () => {
 
       const { id } = await inquirer.prompt(findRole);
       await database.deleteOne("role", "id", id);
+    }
+
+    if (choice === "DELETEDEPARTMENT") {
+      const allDepartments = await database.selectAll("department");
+
+      const generateChoices = (departments) => {
+        return departments.map((department) => {
+          return {
+            short: department.id,
+            name: department.name,
+            value: department.id,
+          };
+        });
+      };
+      const findDepartment = [
+        {
+          type: "list",
+          message: "Choose the department you would like to delete:",
+          name: "id",
+          choices: generateChoices(allDepartments),
+        },
+      ];
+
+      const { id } = await inquirer.prompt(findDepartment);
+      await database.deleteOne("department", "id", id);
     }
 
     if (choice === "EXIT") {
