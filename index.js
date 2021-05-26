@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const chalk = require("chalk");
 
 const Db = require("./db/database");
 const database = new Db("employees_db");
@@ -15,51 +16,51 @@ const init = async () => {
       name: "choice",
       choices: [
         {
-          name: "--- View all employees ---",
+          name: chalk.bold.magentaBright("--- View all employees ---"),
           value: "VIEWEMPLOYEES",
         },
         {
-          name: "--- View all roles ---",
+          name: chalk.bold.magentaBright("--- View all roles ---"),
           value: "VIEWROLES",
         },
         {
-          name: "--- View all departments ---",
+          name: chalk.bold.magentaBright("--- View all departments ---"),
           value: "VIEWDEPARTMENTS",
         },
         {
-          name: "--- Add a new employee ---",
+          name: chalk.bold.greenBright("--- Add a new employee ---"),
           value: "ADDEMPLOYEE",
         },
         {
-          name: "--- Add a new role ---",
+          name: chalk.bold.greenBright("--- Add a new role ---"),
           value: "ADDROLE",
         },
         {
-          name: "--- Add a new department ---",
+          name: chalk.bold.greenBright("--- Add a new department ---"),
           value: "ADDDEPARTMENT",
         },
         {
-          name: "--- Update employees manager ---",
+          name: chalk.bold.yellowBright("--- Update employees manager ---"),
           value: "UPDATEMANAGER",
         },
         {
-          name: "--- Update employees role ---",
+          name: chalk.bold.yellowBright("--- Update employees role ---"),
           value: "UPDATEROLE",
         },
         {
-          name: "--- Delete an employee ---",
+          name: chalk.bold.redBright("--- Delete an employee ---"),
           value: "DELETEEMPLOYEE",
         },
         {
-          name: "--- Delete a role ---",
+          name: chalk.bold.redBright("--- Delete a role ---"),
           value: "DELETEROLE",
         },
         {
-          name: "--- Delete a department ---",
+          name: chalk.bold.redBright("--- Delete a department ---"),
           value: "DELETEDEPARTMENT",
         },
         {
-          name: "--- Exit app ---",
+          name: chalk.bold.whiteBright("--- Exit app ---"),
           value: "EXIT",
         },
       ],
