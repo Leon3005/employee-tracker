@@ -39,6 +39,10 @@ const init = async () => {
           value: "ADDDEPARTMENT",
         },
         {
+          name: "--- Update employees manager ---",
+          value: "UPDATEMANAGER",
+        },
+        {
           name: "--- Update employees role ---",
           value: "UPDATEROLE",
         },
@@ -152,6 +156,37 @@ const init = async () => {
 
       const answers = await inquirer.prompt(newDepartmentQ);
       await database.addDepartment(answers);
+    }
+
+    if (choice === "UPDATEMANAGER") {
+      const employees = await database.selectAll("employee");
+
+      const generateChoicesEmployee = (emps) => {
+        return emps.map((emp) => {
+          return {
+            short: emp.id,
+            name: emp.first_name + " " + emp.last_name,
+            value: emp.id,
+          };
+        });
+      };
+      const updateManagerQ = [
+        {
+          type: "list",
+          message: "Choose the employee you would like to update:",
+          name: "id",
+          choices: generateChoicesEmployee(employees),
+        },
+        {
+          type: "list",
+          message: "Choose the manager you would like to add:",
+          name: "manager_id",
+          choices: generateChoicesEmployee(employees),
+        },
+      ];
+
+      const { manager_id, id } = await inquirer.prompt(updateManagerQ);
+      await database.updateOne("employee", { manager_id }, "id", id);
     }
 
     if (choice === "UPDATEROLE") {
