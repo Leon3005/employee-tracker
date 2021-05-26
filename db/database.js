@@ -109,6 +109,22 @@ class Db {
     });
   }
 
+  updateOne(tableName, data, columnName, value) {
+    return new Promise((resolve, reject) => {
+      const handleQuery = (err, rows) => {
+        if (err) reject(err);
+        console.log("Successfully updated data");
+        resolve(rows);
+      };
+
+      this.connection.query(
+        `UPDATE ${tableName} SET ? WHERE ??="?";`,
+        [data, columnName, value],
+        handleQuery
+      );
+    });
+  }
+
   deleteEmployee(tableName, columnName, value) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {

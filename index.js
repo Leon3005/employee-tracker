@@ -39,6 +39,10 @@ const init = async () => {
           value: "ADDDEPARTMENT",
         },
         {
+          name: "--- Update employees role ---",
+          value: "UPDATEROLE",
+        },
+        {
           name: "--- Delete an employee ---",
           value: "DELETEEMPLOYEE",
         },
@@ -148,6 +152,47 @@ const init = async () => {
 
       const answers = await inquirer.prompt(newDepartmentQ);
       await database.addDepartment(answers);
+    }
+
+    if (choice === "UPDATEROLE") {
+      const employees = await database.selectAll("employee");
+      const allRoles = await database.selectAll("role");
+
+      const generateChoicesEmployee = (emps) => {
+        return emps.map((emp) => {
+          return {
+            short: emp.id,
+            name: emp.first_name + " " + emp.last_name,
+            value: emp.id,
+          };
+        });
+      };
+      const generateChoicesRole = (roles) => {
+        return roles.map((role) => {
+          return {
+            short: role.id,
+            name: role.title,
+            value: role.id,
+          };
+        });
+      };
+      const updateRoleQ = [
+        {
+          type: "list",
+          message: "Choose the employee you would like to update:",
+          name: "id",
+          choices: generateChoicesEmployee(employees),
+        },
+        {
+          type: "list",
+          message: "Choose the role you would like to change to:",
+          name: "role_id",
+          choices: generateChoicesRole(allRoles),
+        },
+      ];
+
+      const { role_id, id } = await inquirer.prompt(updateRoleQ);
+      await database.updateOne("employee", { role_id }, "id", id);
     }
 
     if (choice === "DELETEEMPLOYEE") {
