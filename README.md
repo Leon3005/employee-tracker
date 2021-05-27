@@ -31,7 +31,10 @@ Run 'node index.js' or 'npm run start'.
 ## Screenshots
 
 Some available options:  
-![Options](./public/assets/images/indexPage.png "Options")
+![Options](./public/assets/images/options.png "Options")
+
+View all employees:
+![Employees](./public/assets/images/employees.png "Employees")
 
 ## Tech/framework used
 
