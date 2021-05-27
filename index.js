@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 
-const Db = require("./db/database");
+const Db = require("./src/db/database");
 const database = new Db("employees_db");
 
 const init = async () => {
