@@ -1,15 +1,20 @@
+// Importing node modules.
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 
+// Importing the Db class and making a new instance called database.
 const Db = require("./src/db/database");
 const database = new Db("employees_db");
 
+//Creating the function to run all of the questions/app.
 const init = async () => {
+  //Calling the start function to start the database.
   await database.start();
 
   let inProgress = true;
 
   while (inProgress) {
+    //List of available choices
     const selectOption = {
       type: "list",
       message: "Choose an option from the list below:",
@@ -65,8 +70,10 @@ const init = async () => {
         },
       ],
     };
+    //Getting the answer of the above options.
     const { choice } = await inquirer.prompt(selectOption);
 
+    //Using if statements to invoke a function from the database class depending on the user choice.
     if (choice === "VIEWEMPLOYEES") {
       const employees = await database.allEmployeeData();
       console.table(employees);
@@ -85,6 +92,7 @@ const init = async () => {
     if (choice === "ADDEMPLOYEE") {
       const allRoles = await database.selectAll("role");
 
+      //The below generateChoices is used to show all roles available in the database.
       const generateChoices = (roles) => {
         return roles.map((role) => {
           return {
@@ -115,12 +123,14 @@ const init = async () => {
       ];
 
       const answers = await inquirer.prompt(newEmployeeQ);
+      //This will add a new employee and their role id.
       await database.addEmployee(answers);
     }
 
     if (choice === "ADDROLE") {
       const allDepartments = await database.selectAll("department");
 
+      //Returns all departments as choices.
       const generateChoices = (departments) => {
         return departments.map((department) => {
           return {
@@ -168,6 +178,7 @@ const init = async () => {
     }
 
     if (choice === "UPDATEMANAGER") {
+      //Makes all employees available to be chosen.
       const employees = await database.selectAll("employee");
 
       const generateChoicesEmployee = (emps) => {
@@ -195,6 +206,7 @@ const init = async () => {
       ];
 
       const { manager_id, id } = await inquirer.prompt(updateManagerQ);
+      //Updates the employees manager ID
       await database.updateOne("employee", { manager_id }, "id", id);
     }
 
@@ -235,6 +247,7 @@ const init = async () => {
         },
       ];
 
+      //Updates the employees role ID
       const { role_id, id } = await inquirer.prompt(updateRoleQ);
       await database.updateOne("employee", { role_id }, "id", id);
     }
@@ -260,6 +273,7 @@ const init = async () => {
         },
       ];
 
+      //This will delete the employee where the ID matches the one chosen. Same for Departments and Roles.
       const { id } = await inquirer.prompt(findEmployee);
       await database.deleteOne("employee", "id", id);
     }

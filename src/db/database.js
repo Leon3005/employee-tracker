@@ -2,6 +2,7 @@ const mysql = require("mysql");
 
 class Db {
   constructor(database) {
+    //Defining the settings for the database that will be used with the connection underneath.
     const dbSettings = {
       host: "localhost",
       port: 3306,
@@ -14,6 +15,7 @@ class Db {
       (this.connection = mysql.createConnection(dbSettings));
   }
 
+  //The start function that will start the connection to the database.
   start() {
     return new Promise((resolve, reject) => {
       const startConnection = (err) => {
@@ -27,6 +29,7 @@ class Db {
     });
   }
 
+  //The end function that will stop the connection when 'Exit' is selected in the app.
   end() {
     this.connection.end();
     console.log(`Disconnected from ${this.database}`);
