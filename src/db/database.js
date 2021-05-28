@@ -35,6 +35,7 @@ class Db {
     console.log(`Disconnected from ${this.database}`);
   }
 
+  //This function uses LEFT JOINS to show the role and departments for employees depending on the role_id
   allEmployeeData() {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, data) => {
@@ -48,6 +49,7 @@ class Db {
     });
   }
 
+  //selectAll accepts a template literal to find all data from a given table.
   selectAll(tableName) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
@@ -59,6 +61,7 @@ class Db {
     });
   }
 
+  //This function uses RIGHT JOIN to display all roles and departments.
   allRolesDepartments() {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, data) => {
@@ -72,7 +75,8 @@ class Db {
     });
   }
 
-  addEmployee(data) {
+  //Uses a parameterised query to add a new entry depending on user input. (applied to employee, role, and department)
+  addNew(tableName, data) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
@@ -80,38 +84,15 @@ class Db {
         resolve(rows);
       };
 
-      this.connection.query(`INSERT INTO employee SET ? ;`, data, handleQuery);
-    });
-  }
-
-  addRole(data) {
-    return new Promise((resolve, reject) => {
-      const handleQuery = (err, rows) => {
-        if (err) reject(err);
-        console.log("Role has been added!");
-        resolve(rows);
-      };
-
-      this.connection.query(`INSERT INTO role SET ? ;`, data, handleQuery);
-    });
-  }
-
-  addDepartment(data) {
-    return new Promise((resolve, reject) => {
-      const handleQuery = (err, rows) => {
-        if (err) reject(err);
-        console.log("Department has been added!");
-        resolve(rows);
-      };
-
       this.connection.query(
-        `INSERT INTO department SET ? ;`,
+        `INSERT INTO ${tableName} SET ? ;`,
         data,
         handleQuery
       );
     });
   }
 
+  //Uses parameterised queries to update data such as employee manager and role.
   updateOne(tableName, data, columnName, value) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
@@ -128,6 +109,7 @@ class Db {
     });
   }
 
+  //Uses parameterised queries to delete from tables such as employee, role, and department.
   deleteOne(tableName, columnName, value) {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
@@ -136,7 +118,7 @@ class Db {
         resolve(rows);
       };
 
-      const query = this.connection.query(
+      this.connection.query(
         `DELETE FROM ${tableName} WHERE ??=?`,
         [columnName, value],
         handleQuery

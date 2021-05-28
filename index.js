@@ -124,7 +124,7 @@ const init = async () => {
 
       const answers = await inquirer.prompt(newEmployeeQ);
       //This will add a new employee and their role id.
-      await database.addEmployee(answers);
+      await database.addNew("employee", answers);
     }
 
     if (choice === "ADDROLE") {
@@ -161,7 +161,7 @@ const init = async () => {
       ];
 
       const answers = await inquirer.prompt(newRoleQ);
-      await database.addRole(answers);
+      await database.addNew("role", answers);
     }
 
     if (choice === "ADDDEPARTMENT") {
@@ -174,7 +174,7 @@ const init = async () => {
       ];
 
       const answers = await inquirer.prompt(newDepartmentQ);
-      await database.addDepartment(answers);
+      await database.addNew("department", answers);
     }
 
     if (choice === "UPDATEMANAGER") {
