@@ -43,6 +43,8 @@ View all employees:
 - [Node.js](https://nodejs.org/en/)
 - [Inquirer.js](https://www.npmjs.com/package/inquirer)
 - [MYSQL](https://www.mysql.com/)
+- [console.table](https://www.npmjs.com/package/console.table)
+- [chalk](https://www.npmjs.com/package/chalk)
 
 ## Features
 
