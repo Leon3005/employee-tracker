@@ -114,7 +114,7 @@ class Db {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
-        console.log("Role deleted!");
+        console.log("Data deleted!");
         resolve(rows);
       };
 
