@@ -41,4 +41,41 @@ const addEmployee = async () => {
   await database.addNew("employee", answers);
 };
 
-module.exports = { addEmployee };
+const addRole = async () => {
+  const allDepartments = await database.selectAll("department");
+
+  //Returns all departments as choices.
+  const generateChoices = (departments) => {
+    return departments.map((department) => {
+      return {
+        short: department.id,
+        name: department.name,
+        value: department.id,
+      };
+    });
+  };
+
+  const newRoleQ = [
+    {
+      type: "input",
+      message: "Enter the name of the role:",
+      name: "title",
+    },
+    {
+      type: "input",
+      message: "Enter the salary of the role: (with 2 decimal points)",
+      name: "salary",
+    },
+    {
+      type: "list",
+      message: "Choose the department the role belongs to:",
+      name: "department_id",
+      choices: generateChoices(allDepartments),
+    },
+  ];
+
+  const answers = await inquirer.prompt(newRoleQ);
+  await database.addNew("role", answers);
+};
+
+module.exports = { addEmployee, addRole };

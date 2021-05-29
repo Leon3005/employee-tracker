@@ -7,7 +7,7 @@ const Db = require("./src/db/database");
 const database = new Db("employees_db");
 
 //Importing add, update, and delete functions
-const { addEmployee } = require("./src/utils/addData");
+const { addEmployee, addRole } = require("./src/utils/addData");
 
 //Creating the function to run all of the questions/app.
 const init = async () => {
@@ -97,40 +97,7 @@ const init = async () => {
     }
 
     if (choice === "ADDROLE") {
-      const allDepartments = await database.selectAll("department");
-
-      //Returns all departments as choices.
-      const generateChoices = (departments) => {
-        return departments.map((department) => {
-          return {
-            short: department.id,
-            name: department.name,
-            value: department.id,
-          };
-        });
-      };
-
-      const newRoleQ = [
-        {
-          type: "input",
-          message: "Enter the name of the role:",
-          name: "title",
-        },
-        {
-          type: "input",
-          message: "Enter the salary of the role: (with 2 decimal points)",
-          name: "salary",
-        },
-        {
-          type: "list",
-          message: "Choose the department the role belongs to:",
-          name: "department_id",
-          choices: generateChoices(allDepartments),
-        },
-      ];
-
-      const answers = await inquirer.prompt(newRoleQ);
-      await database.addNew("role", answers);
+      await addRole();
     }
 
     if (choice === "ADDDEPARTMENT") {
