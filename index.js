@@ -7,7 +7,7 @@ const Db = require("./src/db/database");
 const database = new Db("employees_db");
 
 //Importing add, update, and delete functions
-const { addEmployee, addRole } = require("./src/utils/addData");
+const { addEmployee, addRole, addDepartment } = require("./src/utils/addData");
 
 //Creating the function to run all of the questions/app.
 const init = async () => {
@@ -101,16 +101,7 @@ const init = async () => {
     }
 
     if (choice === "ADDDEPARTMENT") {
-      const newDepartmentQ = [
-        {
-          type: "input",
-          message: "Enter the name of the department:",
-          name: "name",
-        },
-      ];
-
-      const answers = await inquirer.prompt(newDepartmentQ);
-      await database.addNew("department", answers);
+      await addDepartment();
     }
 
     if (choice === "UPDATEMANAGER") {

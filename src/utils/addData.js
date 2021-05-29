@@ -78,4 +78,17 @@ const addRole = async () => {
   await database.addNew("role", answers);
 };
 
-module.exports = { addEmployee, addRole };
+const addDepartment = async () => {
+  const newDepartmentQ = [
+    {
+      type: "input",
+      message: "Enter the name of the department:",
+      name: "name",
+    },
+  ];
+
+  const answers = await inquirer.prompt(newDepartmentQ);
+  await database.addNew("department", answers);
+};
+
+module.exports = { addEmployee, addRole, addDepartment };
