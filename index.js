@@ -6,6 +6,9 @@ const chalk = require("chalk");
 const Db = require("./src/db/database");
 const database = new Db("employees_db");
 
+//Importing add, update, and delete functions
+const { addEmployee } = require("./src/utils/addData");
+
 //Creating the function to run all of the questions/app.
 const init = async () => {
   //Calling the start function to start the database.
@@ -90,41 +93,7 @@ const init = async () => {
     }
 
     if (choice === "ADDEMPLOYEE") {
-      const allRoles = await database.selectAll("role");
-
-      //The below generateChoices is used to show all roles available in the database.
-      const generateChoices = (roles) => {
-        return roles.map((role) => {
-          return {
-            short: role.id,
-            name: role.title,
-            value: role.id,
-          };
-        });
-      };
-
-      const newEmployeeQ = [
-        {
-          type: "input",
-          message: "Enter the first name of the employee:",
-          name: "first_name",
-        },
-        {
-          type: "input",
-          message: "Enter the last name of the employee:",
-          name: "last_name",
-        },
-        {
-          type: "list",
-          message: "Choose the employee's role:",
-          name: "role_id",
-          choices: generateChoices(allRoles),
-        },
-      ];
-
-      const answers = await inquirer.prompt(newEmployeeQ);
-      //This will add a new employee and their role id.
-      await database.addNew("employee", answers);
+      addEmployee();
     }
 
     if (choice === "ADDROLE") {
