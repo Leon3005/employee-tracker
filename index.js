@@ -93,7 +93,7 @@ const init = async () => {
     }
 
     if (choice === "ADDEMPLOYEE") {
-      addEmployee();
+      await addEmployee();
     }
 
     if (choice === "ADDROLE") {
