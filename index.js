@@ -134,6 +134,7 @@ const init = async () => {
       console.log("App exited.");
       inProgress = false;
       await database.end();
+      process.exit(0);
     }
   }
 };
