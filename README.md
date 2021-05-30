@@ -4,6 +4,8 @@
 
 The Employee Tracker uses Node.js, Inquirer.js, and MYSQL to allow users to keep a track of employees and their roles, departments, and salaries. They are able to add, update, and delete employees, roles, and departments. Once the app has started and an option is selected, a query will be sent to the MYSQL database to perform the chosen action.
 
+[Walkthrough Video](https://drive.google.com/file/d/1zu0FUvbd9YnpcmE476eEZNpr6zcZsCoV/view?usp=sharing)
+
 ## Table of Contents
 
 - [Employee Tracker](#employee-tracker)
