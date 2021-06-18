@@ -1,9 +1,6 @@
 const inquirer = require("inquirer");
 
-const Db = require("../db/database");
-const database = new Db("employees_db");
-
-const addEmployee = async () => {
+const addEmployee = async (database) => {
   const allRoles = await database.selectAll("role");
 
   //The below generateChoices is used to show all roles available in the database.
@@ -41,7 +38,7 @@ const addEmployee = async () => {
   await database.addNew("employee", answers);
 };
 
-const addRole = async () => {
+const addRole = async (database) => {
   const allDepartments = await database.selectAll("department");
 
   //Returns all departments as choices.
@@ -78,7 +75,7 @@ const addRole = async () => {
   await database.addNew("role", answers);
 };
 
-const addDepartment = async () => {
+const addDepartment = async (database) => {
   const newDepartmentQ = [
     {
       type: "input",

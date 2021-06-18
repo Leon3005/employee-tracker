@@ -99,15 +99,15 @@ const init = async () => {
     }
 
     if (choice === "ADDEMPLOYEE") {
-      await addEmployee();
+      await addEmployee(database);
     }
 
     if (choice === "ADDROLE") {
-      await addRole();
+      await addRole(database);
     }
 
     if (choice === "ADDDEPARTMENT") {
-      await addDepartment();
+      await addDepartment(database);
     }
 
     if (choice === "UPDATEMANAGER") {
