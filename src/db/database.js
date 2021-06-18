@@ -80,7 +80,7 @@ class Db {
     return new Promise((resolve, reject) => {
       const handleQuery = (err, rows) => {
         if (err) reject(err);
-        console.log("Employee has been added!");
+        console.log("Data has been added!");
         resolve(rows);
       };
 
