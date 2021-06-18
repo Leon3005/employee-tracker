@@ -119,15 +119,15 @@ const init = async () => {
     }
 
     if (choice === "DELETEEMPLOYEE") {
-      await deleteEmployee();
+      await deleteEmployee(database);
     }
 
     if (choice === "DELETEROLE") {
-      await deleteRole();
+      await deleteRole(database);
     }
 
     if (choice === "DELETEDEPARTMENT") {
-      await deleteDepartment();
+      await deleteDepartment(database);
     }
 
     if (choice === "EXIT") {

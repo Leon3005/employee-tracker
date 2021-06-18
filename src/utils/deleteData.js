@@ -1,9 +1,6 @@
 const inquirer = require("inquirer");
 
-const Db = require("../db/database");
-const database = new Db("employees_db");
-
-const deleteEmployee = async () => {
+const deleteEmployee = async (database) => {
   const employees = await database.selectAll("employee");
 
   const generateChoices = (emps) => {
@@ -29,7 +26,7 @@ const deleteEmployee = async () => {
   await database.deleteOne("employee", "id", id);
 };
 
-const deleteRole = async () => {
+const deleteRole = async (database) => {
   const allRoles = await database.selectAll("role");
 
   const generateChoices = (roles) => {
@@ -54,7 +51,7 @@ const deleteRole = async () => {
   await database.deleteOne("role", "id", id);
 };
 
-const deleteDepartment = async () => {
+const deleteDepartment = async (database) => {
   const allDepartments = await database.selectAll("department");
 
   const generateChoices = (departments) => {
