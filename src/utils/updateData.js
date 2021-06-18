@@ -1,9 +1,6 @@
 const inquirer = require("inquirer");
 
-const Db = require("../db/database");
-const database = new Db("employees_db");
-
-const updateManager = async () => {
+const updateManager = async (database) => {
   //Makes all employees available to be chosen.
   const employees = await database.selectAll("employee");
 
@@ -36,7 +33,7 @@ const updateManager = async () => {
   await database.updateOne("employee", { manager_id }, "id", id);
 };
 
-const updateRole = async () => {
+const updateRole = async (database) => {
   const employees = await database.selectAll("employee");
   const allRoles = await database.selectAll("role");
 

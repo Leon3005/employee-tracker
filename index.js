@@ -111,11 +111,11 @@ const init = async () => {
     }
 
     if (choice === "UPDATEMANAGER") {
-      await updateManager();
+      await updateManager(database);
     }
 
     if (choice === "UPDATEROLE") {
-      await updateRole();
+      await updateRole(database);
     }
 
     if (choice === "DELETEEMPLOYEE") {
