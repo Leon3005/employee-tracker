@@ -99,35 +99,35 @@ const init = async () => {
     }
 
     if (choice === "ADDEMPLOYEE") {
-      await addEmployee();
+      await addEmployee(database);
     }
 
     if (choice === "ADDROLE") {
-      await addRole();
+      await addRole(database);
     }
 
     if (choice === "ADDDEPARTMENT") {
-      await addDepartment();
+      await addDepartment(database);
     }
 
     if (choice === "UPDATEMANAGER") {
-      await updateManager();
+      await updateManager(database);
     }
 
     if (choice === "UPDATEROLE") {
-      await updateRole();
+      await updateRole(database);
     }
 
     if (choice === "DELETEEMPLOYEE") {
-      await deleteEmployee();
+      await deleteEmployee(database);
     }
 
     if (choice === "DELETEROLE") {
-      await deleteRole();
+      await deleteRole(database);
     }
 
     if (choice === "DELETEDEPARTMENT") {
-      await deleteDepartment();
+      await deleteDepartment(database);
     }
 
     if (choice === "EXIT") {
